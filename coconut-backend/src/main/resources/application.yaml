@@ -16,3 +16,5 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+file-dir: /Users/Shared/SpringbootFile/
