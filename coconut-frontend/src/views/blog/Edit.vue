@@ -15,7 +15,7 @@
                                 ></el-input>
                             </el-form-item>
 
-                            <mavon-editor v-model="blog.content" language="en"></mavon-editor>
+                            <mavon-editor v-model="blog.content" ref="md" @imgAdd="uploadImage" language="en"></mavon-editor>
 
                             <b-taginput
                                 v-model="blog.tagNames"
@@ -69,8 +69,17 @@
                         params: {id : res.data.data.id}
                     })
                 })
+            },
+            uploadImage(pos, file) {
+                let formdata = new FormData()
+                formdata.append("file", file)
+                this.$axios.post("/file/upload", formdata, {
+                    headers: {"Content-Type": "multipart/form-data"}
+                }).then(res => {
+                    this.$refs.md.$img2Url(pos, res.data.data)
+                })
             }
-        },
+        }
     };
 </script>
 
